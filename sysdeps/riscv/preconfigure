@@ -7,8 +7,6 @@ riscv*)
     
     case "$xlen" in
     32)
-	echo "glibc does not yet support 32-bit systems" >&2
-	exit 1
     	;;
     64)
 	;;
@@ -24,8 +22,8 @@ riscv*)
 	with_fp_cond=1
     	;;
     32)
-        echo "glibc does not yet support systems with the F but not D extensions" >&2
-	exit 1
+	float_machine=rvd
+	with_fp_cond=1
 	;;
     "")
 	with_fp_cond=0

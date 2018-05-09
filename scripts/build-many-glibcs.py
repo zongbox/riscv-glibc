@@ -344,6 +344,21 @@ class Context(object):
                         variant='rv64imafdc-lp64d',
                         gcc_cfg=['--with-arch=rv64imafdc', '--with-abi=lp64d',
                                  '--disable-multilib'])
+        self.add_config(arch='riscv32',
+                        os_name='linux-gnu',
+                        variant='rv32imac-ilp32',
+                        gcc_cfg=['--with-arch=rv32imac', '--with-abi=ilp32',
+                                 '--disable-multilib'])
+        self.add_config(arch='riscv32',
+                        os_name='linux-gnu',
+                        variant='rv32imafdc-ilp32',
+                        gcc_cfg=['--with-arch=rv32imafdc', '--with-abi=ilp32',
+                                 '--disable-multilib'])
+        self.add_config(arch='riscv32',
+                        os_name='linux-gnu',
+                        variant='rv32imafdc-ilp32d',
+                        gcc_cfg=['--with-arch=rv32imafdc', '--with-abi=ilp32d',
+                                 '--disable-multilib'])
         self.add_config(arch='s390x',
                         os_name='linux-gnu',
                         glibcs=[{},

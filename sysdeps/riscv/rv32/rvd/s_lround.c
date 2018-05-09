@@ -1,5 +1,5 @@
-/* ldconfig default paths and libraries.  Linux/RISC-V version.
-   Copyright (C) 2001-2018 Free Software Foundation, Inc.
+/* lround().  RISC-V version.
+   Copyright (C) 2017-2018 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -16,21 +16,16 @@
    License along with the GNU C Library.  If not, see
    <http://www.gnu.org/licenses/>.  */
 
-#include <sysdeps/generic/ldconfig.h>
+#include <math.h>
+#include <libm-alias-double.h>
+#include <stdint.h>
 
-#define LD_SO_PREFIX "/lib/ld-linux-"
-#define LD_SO_SUFFIX ".so.1"
+long int
+__lround (double x)
+{
+  int32_t res;
+  asm ("fcvt.w.d %0, %1, rmm" : "=r" (res) : "f" (x));
+  return res;
+}
 
-#if __riscv_xlen == 64
-# define LD_SO_ABI "riscv64-lp64"
-#else
-# define LD_SO_ABI "riscv32-ilp32"
-#endif
-
-#define SYSDEP_KNOWN_INTERPRETER_NAMES				\
-  { LD_SO_PREFIX LD_SO_ABI "d" LD_SO_SUFFIX, FLAG_ELF_LIBC6 },	\
-  { LD_SO_PREFIX LD_SO_ABI     LD_SO_SUFFIX, FLAG_ELF_LIBC6 },
-
-#define SYSDEP_KNOWN_LIBRARY_NAMES	\
-  { "libc.so.6", FLAG_ELF_LIBC6 },	\
-  { "libm.so.6", FLAG_ELF_LIBC6 },
+libm_alias_double (__lround, lround)
