@@ -4,16 +4,9 @@ riscv*)
     flen=`$CC $CFLAGS $CPPFLAGS -E -dM -xc /dev/null | sed -n 's/^#define __riscv_flen \(.*\)/\1/p'`
     float_abi=`$CC $CFLAGS $CPPFLAGS -E -dM -xc /dev/null | sed -n 's/^#define __riscv_float_abi_\([^ ]*\) .*/\1/p'`
     atomic=`$CC $CFLAGS $CPPFLAGS -E -dM -xc /dev/null | grep '#define __riscv_atomic' | cut -d' ' -f2`
-<<<<<<< Updated upstream
 
-=======
-    
->>>>>>> Stashed changes
     case "$xlen" in
     32)
-	echo "glibc does not yet support 32-bit systems" >&2
-	exit 1
-<<<<<<< Updated upstream
 	;;
     64)
 	;;
@@ -29,8 +22,8 @@ riscv*)
 	with_fp_cond=1
 	;;
     32)
-	echo "glibc does not yet support systems with the F but not D extensions" >&2
-	exit 1
+	float_machine=rvd
+	with_fp_cond=1
 	;;
     "")
 	with_fp_cond=0
@@ -45,61 +38,17 @@ riscv*)
     soft)
 	abi_flen=0
 	;;
-=======
-    	;;
-    64)
-	;;
-    *)
-    	echo "Unable to determine XLEN" >&2
-    	exit 1
-    	;;
-    esac
-    
-    case "$flen" in
-    64)
-    	float_machine=rvd
-	with_fp_cond=1
-    	;;
-    32)
-        echo "glibc does not yet support systems with the F but not D extensions" >&2
-	exit 1
-	;;
-    "")
-	echo "glibc does not yet support systems without the F extension" >&2
-	exit 1
-	with_fp_cond=0
-    	;;
-    *)
-    	echo "Unable to determine FLEN" >&2
-    	exit 1
-    	;;
-    esac
-    
-    case "$float_abi" in
-    soft)
-    	abi_flen=0
-    	;;
->>>>>>> Stashed changes
     single)
 	echo "glibc does not yet support the single floating-point ABI" >&2
 	exit 1
 	;;
     double)
-<<<<<<< Updated upstream
 	abi_flen=64
 	;;
     *)
 	echo "Unable to determine floating-point ABI" >&2
 	exit 1
 	;;
-=======
-    	abi_flen=64
-    	;;
-    *)
-    	echo "Unable to determine floating-point ABI" >&2
-    	exit 1
-    	;;
->>>>>>> Stashed changes
     esac
 
     case "$atomic" in
@@ -110,17 +59,10 @@ riscv*)
 	exit 1
 	;;
     esac
-<<<<<<< Updated upstream
 
     base_machine=riscv
     machine=riscv/rv$xlen/$float_machine
 
-=======
-    
-    base_machine=riscv
-    machine=riscv/rv$xlen/$float_machine
-    
->>>>>>> Stashed changes
     $as_echo "#define RISCV_ABI_XLEN $xlen" >>confdefs.h
     $as_echo "#define RISCV_ABI_FLEN $abi_flen" >>confdefs.h
     ;;
