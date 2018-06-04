@@ -1,5 +1,5 @@
-/* ldconfig default paths and libraries.  Linux/RISC-V version.
-   Copyright (C) 2001-2018 Free Software Foundation, Inc.
+/* Internal definitions for thread-friendly fork implementation.  Linux/RISC-V.
+   Copyright (C) 2002-2018 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -13,24 +13,14 @@
    Lesser General Public License for more details.
 
    You should have received a copy of the GNU Lesser General Public
-   License along with the GNU C Library.  If not, see
+   License along with the GNU C Library; if not, see
    <http://www.gnu.org/licenses/>.  */
 
-#include <sysdeps/generic/ldconfig.h>
+#include <sched.h>
+#include <sysdep.h>
+#include <tls.h>
 
-#define LD_SO_PREFIX "/lib/ld-linux-"
-#define LD_SO_SUFFIX ".so.1"
-
-#if __riscv_xlen == 64
-# define LD_SO_ABI "riscv64-lp64"
-#else
-# define LD_SO_ABI "riscv32-ilp32"
-#endif
-
-#define SYSDEP_KNOWN_INTERPRETER_NAMES				\
-  { LD_SO_PREFIX LD_SO_ABI "d" LD_SO_SUFFIX, FLAG_ELF_LIBC6 },	\
-  { LD_SO_PREFIX LD_SO_ABI     LD_SO_SUFFIX, FLAG_ELF_LIBC6 },
-
-#define SYSDEP_KNOWN_LIBRARY_NAMES	\
-  { "libc.so.6", FLAG_ELF_LIBC6 },	\
-  { "libm.so.6", FLAG_ELF_LIBC6 },
+#define ARCH_FORK() \
+  INLINE_SYSCALL (clone, 5,						      \
+		  CLONE_CHILD_SETTID | CLONE_CHILD_CLEARTID | SIGCHLD, 0,     \
+		  NULL, NULL, &THREAD_SELF->tid)
