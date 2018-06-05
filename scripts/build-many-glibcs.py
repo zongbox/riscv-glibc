@@ -159,177 +159,6 @@ class Context(object):
 
     def add_all_configs(self):
         """Add all known glibc build configurations."""
-        self.add_config(arch='aarch64',
-                        os_name='linux-gnu',
-                        extra_glibcs=[{'variant': 'disable-multi-arch',
-                                       'cfg': ['--disable-multi-arch']}])
-        self.add_config(arch='aarch64_be',
-                        os_name='linux-gnu')
-        self.add_config(arch='alpha',
-                        os_name='linux-gnu')
-        self.add_config(arch='arm',
-                        os_name='linux-gnueabi')
-        self.add_config(arch='armeb',
-                        os_name='linux-gnueabi')
-        self.add_config(arch='armeb',
-                        os_name='linux-gnueabi',
-                        variant='be8',
-                        gcc_cfg=['--with-arch=armv7-a'])
-        self.add_config(arch='arm',
-                        os_name='linux-gnueabihf',
-                        gcc_cfg=['--with-float=hard', '--with-cpu=arm926ej-s'],
-                        extra_glibcs=[{'variant': 'v7a',
-                                       'ccopts': '-march=armv7-a -mfpu=vfpv3'},
-                                      {'variant': 'v7a-disable-multi-arch',
-                                       'ccopts': '-march=armv7-a -mfpu=vfpv3',
-                                       'cfg': ['--disable-multi-arch']}])
-        self.add_config(arch='armeb',
-                        os_name='linux-gnueabihf',
-                        gcc_cfg=['--with-float=hard', '--with-cpu=arm926ej-s'])
-        self.add_config(arch='armeb',
-                        os_name='linux-gnueabihf',
-                        variant='be8',
-                        gcc_cfg=['--with-float=hard', '--with-arch=armv7-a',
-                                 '--with-fpu=vfpv3'])
-        self.add_config(arch='hppa',
-                        os_name='linux-gnu')
-        self.add_config(arch='i686',
-                        os_name='gnu')
-        self.add_config(arch='ia64',
-                        os_name='linux-gnu',
-                        first_gcc_cfg=['--with-system-libunwind'])
-        self.add_config(arch='m68k',
-                        os_name='linux-gnu',
-                        gcc_cfg=['--disable-multilib'])
-        self.add_config(arch='m68k',
-                        os_name='linux-gnu',
-                        variant='coldfire',
-                        gcc_cfg=['--with-arch=cf', '--disable-multilib'])
-        self.add_config(arch='m68k',
-                        os_name='linux-gnu',
-                        variant='coldfire-soft',
-                        gcc_cfg=['--with-arch=cf', '--with-cpu=54455',
-                                 '--disable-multilib'])
-        self.add_config(arch='microblaze',
-                        os_name='linux-gnu',
-                        gcc_cfg=['--disable-multilib'])
-        self.add_config(arch='microblazeel',
-                        os_name='linux-gnu',
-                        gcc_cfg=['--disable-multilib'])
-        self.add_config(arch='mips64',
-                        os_name='linux-gnu',
-                        gcc_cfg=['--with-mips-plt'],
-                        glibcs=[{'variant': 'n32'},
-                                {'arch': 'mips',
-                                 'ccopts': '-mabi=32'},
-                                {'variant': 'n64',
-                                 'ccopts': '-mabi=64'}])
-        self.add_config(arch='mips64',
-                        os_name='linux-gnu',
-                        variant='soft',
-                        gcc_cfg=['--with-mips-plt', '--with-float=soft'],
-                        glibcs=[{'variant': 'n32-soft'},
-                                {'variant': 'soft',
-                                 'arch': 'mips',
-                                 'ccopts': '-mabi=32'},
-                                {'variant': 'n64-soft',
-                                 'ccopts': '-mabi=64'}])
-        self.add_config(arch='mips64',
-                        os_name='linux-gnu',
-                        variant='nan2008',
-                        gcc_cfg=['--with-mips-plt', '--with-nan=2008',
-                                 '--with-arch-64=mips64r2',
-                                 '--with-arch-32=mips32r2'],
-                        glibcs=[{'variant': 'n32-nan2008'},
-                                {'variant': 'nan2008',
-                                 'arch': 'mips',
-                                 'ccopts': '-mabi=32'},
-                                {'variant': 'n64-nan2008',
-                                 'ccopts': '-mabi=64'}])
-        self.add_config(arch='mips64',
-                        os_name='linux-gnu',
-                        variant='nan2008-soft',
-                        gcc_cfg=['--with-mips-plt', '--with-nan=2008',
-                                 '--with-arch-64=mips64r2',
-                                 '--with-arch-32=mips32r2',
-                                 '--with-float=soft'],
-                        glibcs=[{'variant': 'n32-nan2008-soft'},
-                                {'variant': 'nan2008-soft',
-                                 'arch': 'mips',
-                                 'ccopts': '-mabi=32'},
-                                {'variant': 'n64-nan2008-soft',
-                                 'ccopts': '-mabi=64'}])
-        self.add_config(arch='mips64el',
-                        os_name='linux-gnu',
-                        gcc_cfg=['--with-mips-plt'],
-                        glibcs=[{'variant': 'n32'},
-                                {'arch': 'mipsel',
-                                 'ccopts': '-mabi=32'},
-                                {'variant': 'n64',
-                                 'ccopts': '-mabi=64'}])
-        self.add_config(arch='mips64el',
-                        os_name='linux-gnu',
-                        variant='soft',
-                        gcc_cfg=['--with-mips-plt', '--with-float=soft'],
-                        glibcs=[{'variant': 'n32-soft'},
-                                {'variant': 'soft',
-                                 'arch': 'mipsel',
-                                 'ccopts': '-mabi=32'},
-                                {'variant': 'n64-soft',
-                                 'ccopts': '-mabi=64'}])
-        self.add_config(arch='mips64el',
-                        os_name='linux-gnu',
-                        variant='nan2008',
-                        gcc_cfg=['--with-mips-plt', '--with-nan=2008',
-                                 '--with-arch-64=mips64r2',
-                                 '--with-arch-32=mips32r2'],
-                        glibcs=[{'variant': 'n32-nan2008'},
-                                {'variant': 'nan2008',
-                                 'arch': 'mipsel',
-                                 'ccopts': '-mabi=32'},
-                                {'variant': 'n64-nan2008',
-                                 'ccopts': '-mabi=64'}])
-        self.add_config(arch='mips64el',
-                        os_name='linux-gnu',
-                        variant='nan2008-soft',
-                        gcc_cfg=['--with-mips-plt', '--with-nan=2008',
-                                 '--with-arch-64=mips64r2',
-                                 '--with-arch-32=mips32r2',
-                                 '--with-float=soft'],
-                        glibcs=[{'variant': 'n32-nan2008-soft'},
-                                {'variant': 'nan2008-soft',
-                                 'arch': 'mipsel',
-                                 'ccopts': '-mabi=32'},
-                                {'variant': 'n64-nan2008-soft',
-                                 'ccopts': '-mabi=64'}])
-        self.add_config(arch='nios2',
-                        os_name='linux-gnu')
-        self.add_config(arch='powerpc',
-                        os_name='linux-gnu',
-                        gcc_cfg=['--disable-multilib', '--enable-secureplt'],
-                        extra_glibcs=[{'variant': 'power4',
-                                       'ccopts': '-mcpu=power4',
-                                       'cfg': ['--with-cpu=power4']}])
-        self.add_config(arch='powerpc',
-                        os_name='linux-gnu',
-                        variant='soft',
-                        gcc_cfg=['--disable-multilib', '--with-float=soft',
-                                 '--enable-secureplt'])
-        self.add_config(arch='powerpc64',
-                        os_name='linux-gnu',
-                        gcc_cfg=['--disable-multilib', '--enable-secureplt'])
-        self.add_config(arch='powerpc64le',
-                        os_name='linux-gnu',
-                        gcc_cfg=['--disable-multilib', '--enable-secureplt'])
-        self.add_config(arch='powerpc',
-                        os_name='linux-gnuspe',
-                        gcc_cfg=['--disable-multilib', '--enable-secureplt',
-                                 '--enable-e500-double', '--enable-obsolete'])
-        self.add_config(arch='powerpc',
-                        os_name='linux-gnuspe',
-                        variant='e500v1',
-                        gcc_cfg=['--disable-multilib', '--enable-secureplt',
-                                 '--enable-obsolete'])
         self.add_config(arch='riscv32',
                         os_name='linux-gnu',
                         variant='rv32imac-ilp32',
@@ -340,82 +169,26 @@ class Context(object):
                         variant='rv32imafdc-ilp32',
                         gcc_cfg=['--with-arch=rv32imafdc', '--with-abi=ilp32',
                                  '--disable-multilib'])
-        self.add_config(arch='riscv32',
-                        os_name='linux-gnu',
-                        variant='rv32imafdc-ilp32d',
-                        gcc_cfg=['--with-arch=rv32imafdc', '--with-abi=ilp32d',
-                                 '--disable-multilib'])
+        #self.add_config(arch='riscv32',
+        #                os_name='linux-gnu',
+        #                variant='rv32imafdc-ilp32d',
+        #                gcc_cfg=['--with-arch=rv32imafdc', '--with-abi=ilp32d',
+        #                         '--disable-multilib'])
         self.add_config(arch='riscv64',
                         os_name='linux-gnu',
                         variant='rv64imac-lp64',
                         gcc_cfg=['--with-arch=rv64imac', '--with-abi=lp64',
                                  '--disable-multilib'])
-        self.add_config(arch='riscv64',
-                        os_name='linux-gnu',
-                        variant='rv64imafdc-lp64',
-                        gcc_cfg=['--with-arch=rv64imafdc', '--with-abi=lp64',
-                                 '--disable-multilib'])
-        self.add_config(arch='riscv64',
-                        os_name='linux-gnu',
-                        variant='rv64imafdc-lp64d',
-                        gcc_cfg=['--with-arch=rv64imafdc', '--with-abi=lp64d',
-                                 '--disable-multilib'])
-        self.add_config(arch='s390x',
-                        os_name='linux-gnu',
-                        glibcs=[{},
-                                {'arch': 's390', 'ccopts': '-m31'}])
-        self.add_config(arch='sh3',
-                        os_name='linux-gnu')
-        self.add_config(arch='sh3eb',
-                        os_name='linux-gnu')
-        self.add_config(arch='sh4',
-                        os_name='linux-gnu')
-        self.add_config(arch='sh4eb',
-                        os_name='linux-gnu')
-        self.add_config(arch='sh4',
-                        os_name='linux-gnu',
-                        variant='soft',
-                        gcc_cfg=['--without-fp'])
-        self.add_config(arch='sh4eb',
-                        os_name='linux-gnu',
-                        variant='soft',
-                        gcc_cfg=['--without-fp'])
-        self.add_config(arch='sparc64',
-                        os_name='linux-gnu',
-                        glibcs=[{},
-                                {'arch': 'sparcv9',
-                                 'ccopts': '-m32 -mlong-double-128'}],
-                        extra_glibcs=[{'variant': 'disable-multi-arch',
-                                       'cfg': ['--disable-multi-arch']},
-                                      {'variant': 'disable-multi-arch',
-                                       'arch': 'sparcv9',
-                                       'ccopts': '-m32 -mlong-double-128',
-                                       'cfg': ['--disable-multi-arch']}])
-        self.add_config(arch='x86_64',
-                        os_name='linux-gnu',
-                        gcc_cfg=['--with-multilib-list=m64,m32,mx32'],
-                        glibcs=[{},
-                                {'variant': 'x32', 'ccopts': '-mx32'},
-                                {'arch': 'i686', 'ccopts': '-m32 -march=i686'}],
-                        extra_glibcs=[{'variant': 'disable-multi-arch',
-                                       'cfg': ['--disable-multi-arch']},
-                                      {'variant': 'static-pie',
-                                       'cfg': ['--enable-static-pie']},
-                                      {'variant': 'x32-static-pie',
-                                       'ccopts': '-mx32',
-                                       'cfg': ['--enable-static-pie']},
-                                      {'variant': 'static-pie',
-                                       'arch': 'i686',
-                                       'ccopts': '-m32 -march=i686',
-                                       'cfg': ['--enable-static-pie']},
-                                      {'variant': 'disable-multi-arch',
-                                       'arch': 'i686',
-                                       'ccopts': '-m32 -march=i686',
-                                       'cfg': ['--disable-multi-arch']},
-                                      {'arch': 'i486',
-                                       'ccopts': '-m32 -march=i486'},
-                                      {'arch': 'i586',
-                                       'ccopts': '-m32 -march=i586'}])
+        #self.add_config(arch='riscv64',
+        #                os_name='linux-gnu',
+        #                variant='rv64imafdc-lp64',
+        #                gcc_cfg=['--with-arch=rv64imafdc', '--with-abi=lp64',
+        #                         '--disable-multilib'])
+        #self.add_config(arch='riscv64',
+        #                os_name='linux-gnu',
+        #                variant='rv64imafdc-lp64d',
+        #                gcc_cfg=['--with-arch=rv64imafdc', '--with-abi=lp64d',
+        #                         '--disable-multilib'])
 
     def add_config(self, **args):
         """Add an individual build configuration."""
@@ -801,11 +574,13 @@ class Context(object):
             svn_url = 'svn://gcc.gnu.org/svn/gcc/%s' % branch
             return self.gcc_checkout(svn_url, update)
         elif component == 'glibc':
-            git_url = 'git://sourceware.org/git/glibc.git'
+            #git_url = 'git://sourceware.org/git/glibc.git'
+            git_url = 'https://github.com/zongbox/riscv-glibc.git'
             if version == 'mainline':
                 git_branch = 'master'
             else:
                 git_branch = 'release/%s/master' % version
+            git_branch = 'riscv-32-new'
             r = self.git_checkout(component, git_url, git_branch, update)
             self.fix_glibc_timestamps()
             return r
