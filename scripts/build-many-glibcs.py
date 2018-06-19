@@ -169,16 +169,16 @@ class Context(object):
                         variant='rv32imafdc-ilp32',
                         gcc_cfg=['--with-arch=rv32imafdc', '--with-abi=ilp32',
                                  '--disable-multilib'])
-        #self.add_config(arch='riscv32',
-        #                os_name='linux-gnu',
-        #                variant='rv32imafdc-ilp32d',
-        #                gcc_cfg=['--with-arch=rv32imafdc', '--with-abi=ilp32d',
-        #                         '--disable-multilib'])
-        self.add_config(arch='riscv64',
+        self.add_config(arch='riscv32',
                         os_name='linux-gnu',
-                        variant='rv64imac-lp64',
-                        gcc_cfg=['--with-arch=rv64imac', '--with-abi=lp64',
+                        variant='rv32imafdc-ilp32d',
+                        gcc_cfg=['--with-arch=rv32imafdc', '--with-abi=ilp32d',
                                  '--disable-multilib'])
+        #self.add_config(arch='riscv64',
+        #                os_name='linux-gnu',
+        #                variant='rv64imac-lp64',
+        #                gcc_cfg=['--with-arch=rv64imac', '--with-abi=lp64',
+        #                         '--disable-multilib'])
         #self.add_config(arch='riscv64',
         #                os_name='linux-gnu',
         #                variant='rv64imafdc-lp64',
@@ -493,16 +493,16 @@ class Context(object):
 
     def checkout(self, versions):
         """Check out the desired component versions."""
-        default_versions = {'binutils': 'vcs-2.30',
-                            'gcc': 'vcs-8',
+        default_versions = {'binutils': '2.30',
+                            'gcc': '8.1.0',
                             'glibc': 'vcs-mainline',
                             'gmp': '6.1.2',
                             'linux': '4.16',
                             'mpc': '1.1.0',
                             'mpfr': '4.0.1',
-                            'mig': 'vcs-mainline',
-                            'gnumach': 'vcs-mainline',
-                            'hurd': 'vcs-mainline'}
+                            'mig': '1.8',
+                            'gnumach': '1.8',
+                            'hurd': '0.9'}
         use_versions = {}
         explicit_versions = {}
         for v in versions:
@@ -659,7 +659,7 @@ class Context(object):
         if update:
             return
         url_map = {'binutils': 'https://ftp.gnu.org/gnu/binutils/binutils-%(version)s.tar.bz2',
-                   'gcc': 'https://ftp.gnu.org/gnu/gcc/gcc-%(version)s/gcc-%(version)s.tar.bz2',
+                   'gcc': 'https://ftp.gnu.org/gnu/gcc/gcc-%(version)s/gcc-%(version)s.tar.gz',
                    'gmp': 'https://ftp.gnu.org/gnu/gmp/gmp-%(version)s.tar.xz',
                    'linux': 'https://www.kernel.org/pub/linux/kernel/v4.x/linux-%(version)s.tar.xz',
                    'mpc': 'https://ftp.gnu.org/gnu/mpc/mpc-%(version)s.tar.gz',
@@ -672,6 +672,7 @@ class Context(object):
             exit(1)
         url = url_map[component] % {'version': version}
         filename = os.path.join(self.srcdir, url.split('/')[-1])
+        print ("url: " + url)
         response = urllib.request.urlopen(url)
         data = response.read()
         with open(filename, 'wb') as f:
