@@ -75,7 +75,7 @@
 	{								\
 	  memcpy (path + len, "32/ilp32d", 10);				\
 	  add_dir (path);						\
-	  memcpy (path + len, "32/ipl32", 9);				\
+	  memcpy (path + len, "32/ilp32", 9);				\
 	  add_dir (path);						\
 	  memcpy (path + len, "64/lp64d", 9);				\
 	  add_dir (path);						\
