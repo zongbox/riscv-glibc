@@ -64,11 +64,26 @@ struct __pthread_rwlock_arch_t
   unsigned int __writers_futex;
   unsigned int __pad3;
   unsigned int __pad4;
+#if __riscv_xlen == 64
   int __cur_writer;
   int __shared;
   unsigned long int __pad1;
   unsigned long int __pad2;
   unsigned int __flags;
+#else
+# if __BYTE_ORDER == __BIG_ENDIAN
+  unsigned char __pad1;
+  unsigned char __pad2;
+  unsigned char __shared;
+  unsigned char __flags;
+# else
+  unsigned char __flags;
+  unsigned char __shared;
+  unsigned char __pad1;
+  unsigned char __pad2;
+# endif
+  int __cur_writer;
+#endif
 };
 
 #define __PTHREAD_RWLOCK_ELISION_EXTRA 		0
