@@ -5,6 +5,18 @@ See the end for copying conditions.
 Please send GNU C library bug reports via <https://sourceware.org/bugzilla/>
 using `glibc' in the "product" field.
 
+Version 2.29
+
+Major new features:
+
+* Support new port for the RISC-V 32-bit. This 32-bit port for the following
+  ISA and ABI pairs:
+
+    - rv32imac ilp32
+    - rv32imafdc ilp32
+    - rv32imafdc ilp32d
+
+
 Version 2.28
 
 Major new features:
