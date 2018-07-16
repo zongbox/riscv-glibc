@@ -35,6 +35,7 @@
 /* We need just a few things from here for op-4, if we ever need some
    other macros, they can be added.  */
 #define _FP_FRAC_DECL_8(X)	_FP_W_TYPE X##_f[8]
+#define _FP_FRAC_SET_8(X, I)    __FP_FRAC_SET_8 (X, I)
 #define _FP_FRAC_HIGH_8(X)	(X##_f[7])
 #define _FP_FRAC_LOW_8(X)	(X##_f[0])
 #define _FP_FRAC_WORD_8(X, w)	(X##_f[w])
@@ -146,5 +147,111 @@
       X##_f[0] |= (_FP_FRAC_SRS_8_s != 0);				\
     }									\
   while (0)
+
+#define _FP_FRAC_ADD_8(R, X, Y)                                         \
+  do                                                                    \
+    {                                                                   \
+      _FP_W_TYPE fa8_c = 0;                                             \
+      for (int fa8_i = 0; fa8_i < 8; ++fa8_i)                           \
+        {                                                               \
+          R##_f[fa8_i] = X##_f[fa8_i] + Y##_f[fa8_i] + fa8_c;           \
+          fa8_c = (fa8_c                                                \
+                   ? R##_f[fa8_i] <= X##_f[fa8_i]                       \
+                   : R##_f[fa8_i] < X##_f[fa8_i]);                      \
+        }                                                               \
+    }                                                                   \
+  while (0)
+
+#define _FP_FRAC_SUB_8(R, X, Y)                                         \
+  do                                                                    \
+    {                                                                   \
+      _FP_W_TYPE fs8_c = 0;                                             \
+      for (int fs8_i = 0; fs8_i < 8; ++fs8_i)                           \
+        {                                                               \
+          R##_f[fs8_i] = X##_f[fs8_i] - Y##_f[fs8_i] - fs8_c;           \
+          fs8_c = (fs8_c                                                \
+                   ? R##_f[fs8_i] >= X##_f[fs8_i]                       \
+                   : R##_f[fs8_i] > X##_f[fs8_i]);                      \
+        }                                                               \
+    }                                                                   \
+  while (0)
+
+#define _FP_FRAC_CLZ_8(R, X)                    \
+  do                                            \
+    {                                           \
+      if (X##_f[7])                             \
+        __FP_CLZ ((R), X##_f[7]);               \
+      else if (X##_f[6])                        \
+        {                                       \
+          __FP_CLZ ((R), X##_f[6]);             \
+          (R) += _FP_W_TYPE_SIZE;               \
+        }                                       \
+      else if (X##_f[5])                        \
+        {                                       \
+          __FP_CLZ ((R), X##_f[5]);             \
+          (R) += _FP_W_TYPE_SIZE * 2;           \
+        }                                       \
+      else if (X##_f[4])                        \
+        {                                       \
+          __FP_CLZ ((R), X##_f[4]);             \
+          (R) += _FP_W_TYPE_SIZE * 3;           \
+        }                                       \
+      else if (X##_f[3])                        \
+        {                                       \
+          __FP_CLZ ((R), X##_f[3]);             \
+          (R) += _FP_W_TYPE_SIZE * 4;           \
+        }                                       \
+      else if (X##_f[2])                        \
+        {                                       \
+          __FP_CLZ ((R), X##_f[2]);             \
+          (R) += _FP_W_TYPE_SIZE * 5;           \
+        }                                       \
+      else if (X##_f[1])                        \
+        {                                       \
+          __FP_CLZ ((R), X##_f[1]);             \
+          (R) += _FP_W_TYPE_SIZE * 6;           \
+        }                                       \
+      else                                      \
+        {                                       \
+          __FP_CLZ ((R), X##_f[0]);             \
+          (R) += _FP_W_TYPE_SIZE * 7;           \
+        }                                       \
+    }                                           \
+  while (0)
+
+#define _FP_MINFRAC_8   0, 0, 0, 0, 0, 0, 0, 1
+
+#define _FP_FRAC_NEGP_8(X)      ((_FP_WS_TYPE) X##_f[7] < 0)
+#define _FP_FRAC_ZEROP_8(X)                                             \
+  ((X##_f[0] | X##_f[1] | X##_f[2] | X##_f[3]                           \
+    | X##_f[4] | X##_f[5] | X##_f[6] | X##_f[7]) == 0)
+#define _FP_FRAC_HIGHBIT_DW_8(fs, X)                                    \
+  (_FP_FRAC_HIGH_DW_##fs (X) & _FP_HIGHBIT_DW_##fs)
+
+
+#define _FP_FRAC_COPY_4_8(D, S)                           \
+  do                                                      \
+    {                                                     \
+      D##_f[0] = S##_f[0];                                \
+      D##_f[1] = S##_f[1];                                \
+      D##_f[2] = S##_f[2];                                \
+      D##_f[3] = S##_f[3];                                \
+    }                                                     \
+  while (0)
+
+#define _FP_FRAC_COPY_8_4(D, S)                           \
+  do                                                      \
+    {                                                     \
+      D##_f[0] = S##_f[0];                                \
+      D##_f[1] = S##_f[1];                                \
+      D##_f[2] = S##_f[2];                                \
+      D##_f[3] = S##_f[3];                                \
+      D##_f[4] = D##_f[5] = D##_f[6] = D##_f[7]= 0;       \
+    }                                                     \
+  while (0)
+
+#define __FP_FRAC_SET_8(X, I7, I6, I5, I4, I3, I2, I1, I0)             \
+  (X##_f[7] = I7, X##_f[6] = I6, X##_f[5] = I5, X##_f[4] = I4,         \
+   X##_f[3] = I3, X##_f[2] = I2, X##_f[1] = I1, X##_f[0] = I0)
 
 #endif /* !SOFT_FP_OP_8_H */
