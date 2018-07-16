@@ -1,3 +1,7 @@
+2018-07-25  Zong Li  <zong@andestech.com>
+
+	* soft-fp/op-8.h: Add macros.
+
 2018-07-25  Carlos O'Donell <carlos@redhat.com>
 
 	[BZ #23393]
