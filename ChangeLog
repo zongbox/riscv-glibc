@@ -2,6 +2,8 @@
 
 	* elf/Makefile (LDFLAGS-tst-execstack-mod): Change variable name by
 	adding the file extension (.so).
+	* scripts/build-many-glibcs.py (checkout_tar): Change the URL of gcc's
+	tarball.
 
 2018-07-20  Samuel Thibault  <samuel.thibault@ens-lyon.org>
 
