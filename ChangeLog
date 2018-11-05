@@ -1,3 +1,7 @@
+2018-11-15  Zong Li  <zong@andestech.com>
+
+	* sysdeps/unix/sysv/linux/riscv/ldconfig.h (LD_SO_ABI): Support rv32.
+
 2018-11-14  Samuel Thibault  <samuel.thibault@ens-lyon.org>
 
 	* sysdeps/mach/hurd/dl-sysdep.c (check_no_hidden): Use
