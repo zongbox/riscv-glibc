@@ -43,6 +43,7 @@
 	* sysdeps/unix/sysv/linux/riscv/shlib-versions: Likewise.
 	* sysdeps/riscv/preconfigure: Likewise.
 	* sysdeps/riscv/rv32/fix-fp-int-convert-overflow.h: New file.
+	* scripts/build-many-glibcs.py (Context): Add rv32 targets.
 
 2018-11-03  Samuel Thibault  <samuel.thibault@ens-lyon.org>
 
