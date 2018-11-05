@@ -42,6 +42,7 @@
 	* sysdeps/unix/sysv/linux/riscv/configure.ac: Likewise.
 	* sysdeps/unix/sysv/linux/riscv/shlib-versions: Likewise.
 	* sysdeps/riscv/preconfigure: Likewise.
+	* sysdeps/riscv/rv32/fix-fp-int-convert-overflow.h: New file.
 
 2018-11-03  Samuel Thibault  <samuel.thibault@ens-lyon.org>
 
