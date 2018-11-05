@@ -532,16 +532,16 @@ double: 1
 float: 1
 idouble: 1
 ifloat: 1
-ildouble: 1
-ldouble: 1
+ildouble: 8
+ldouble: 8
 
 Function: Imaginary part of "catan":
 double: 1
 float: 1
 idouble: 1
 ifloat: 1
-ildouble: 1
-ldouble: 1
+ildouble: 4
+ldouble: 4
 
 Function: Real part of "catan_downward":
 double: 1
@@ -596,16 +596,16 @@ double: 1
 float: 1
 idouble: 1
 ifloat: 1
-ildouble: 1
-ldouble: 1
+ildouble: 4
+ldouble: 4
 
 Function: Imaginary part of "catanh":
 double: 1
 float: 1
 idouble: 1
 ifloat: 1
-ildouble: 1
-ldouble: 1
+ildouble: 8
+ldouble: 8
 
 Function: Real part of "catanh_downward":
 double: 2
@@ -1006,6 +1006,8 @@ ildouble: 2
 ldouble: 2
 
 Function: "cos":
+double: 1
+idouble: 1
 ildouble: 1
 ldouble: 1
 
@@ -1902,6 +1904,8 @@ ildouble: 1
 ldouble: 1
 
 Function: "pow":
+double: 1
+idouble: 1
 ildouble: 2
 ldouble: 2
 
@@ -1930,6 +1934,8 @@ ildouble: 2
 ldouble: 2
 
 Function: "sin":
+double: 1
+idouble: 1
 ildouble: 1
 ldouble: 1
 
@@ -1952,6 +1958,8 @@ ildouble: 3
 ldouble: 3
 
 Function: "sincos":
+double: 1
+idouble: 1
 ildouble: 1
 ldouble: 1
 
