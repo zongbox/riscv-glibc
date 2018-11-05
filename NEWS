@@ -30,6 +30,12 @@ Major new features:
   HTM state is saved and restore lazily (the state being saved even when the
   process actually does not use HTM).
 
+* Support RISC-V port for 32-bit. The ISA and ABI pairs supported as follows:
+
+    - rv32imac ilp32
+    - rv32imafdc ilp32
+    - rv32imafdc ilp32d
+
 Deprecated and removed features, and other changes affecting compatibility:
 
 * The glibc.tune tunable namespace has been renamed to glibc.cpu and the
