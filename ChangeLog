@@ -1,3 +1,7 @@
+2018-11-29  Zong Li  <zong@andestech.com>
+
+	* sysdeps/unix/sysv/linux/riscv/ldconfig.h (LD_SO_ABI): Support rv32.
+
 2018-11-28  Florian Weimer  <fweimer@redhat.com>
 
 	support: Add signal support to support_capture_subprocess_check.
