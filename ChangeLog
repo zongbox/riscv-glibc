@@ -42,6 +42,7 @@
 	* sysdeps/riscv/preconfigure: Likewise.
 	* sysdeps/riscv/rv32/fix-fp-int-convert-overflow.h: New file.
 	* sysdeps/unix/sysv/linux/riscv/ldd-rewrite.sed: Support rv32
+	* scripts/build-many-glibcs.py (Context): Add rv32 targets.
 
 2019-09-09  Paul Eggert  <eggert@cs.ucla.edu>
 
